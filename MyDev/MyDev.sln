@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDev.Common", "MyDev.Common\MyDev.Common.csproj", "{77FB0324-6809-4428-9EF7-C626376CD595}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSite", "WebSite", "{4F5EEE50-8E2D-45CA-B104-8960DC832C37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portal", "Portal", "{8D6072FD-3EEB-413F-8985-2075683E566E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77FB0324-6809-4428-9EF7-C626376CD595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77FB0324-6809-4428-9EF7-C626376CD595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77FB0324-6809-4428-9EF7-C626376CD595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77FB0324-6809-4428-9EF7-C626376CD595}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D6072FD-3EEB-413F-8985-2075683E566E} = {4F5EEE50-8E2D-45CA-B104-8960DC832C37}
+	EndGlobalSection
+EndGlobal
