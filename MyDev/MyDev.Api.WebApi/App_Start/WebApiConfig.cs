@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDev.Api.WebApi.Areas.HelpPage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -19,6 +20,8 @@ namespace MyDev.Api.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.SetDocumentationProvider(new XmlDocumentationProvider(System.Web.HttpContext.Current.Server.MapPath("~/App_Data/MyDev.Api.WebApi.XML")));
         }
     }
 }
