@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portal", "Portal", "{8D6072
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDev.WebSite.Portal.Web", "MyDev.WebSite.Portal.Web\MyDev.WebSite.Portal.Web.csproj", "{5F1091CF-D988-4B51-893F-7655B829506F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{4CA561F4-7C84-434E-A962-64D595D0D4EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDev.Api.WebApi", "MyDev.Api.WebApi\MyDev.Api.WebApi.csproj", "{FE5FCD79-F703-46E9-AE70-BDB6583532E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{5F1091CF-D988-4B51-893F-7655B829506F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1091CF-D988-4B51-893F-7655B829506F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1091CF-D988-4B51-893F-7655B829506F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE5FCD79-F703-46E9-AE70-BDB6583532E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE5FCD79-F703-46E9-AE70-BDB6583532E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE5FCD79-F703-46E9-AE70-BDB6583532E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE5FCD79-F703-46E9-AE70-BDB6583532E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +40,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8D6072FD-3EEB-413F-8985-2075683E566E} = {4F5EEE50-8E2D-45CA-B104-8960DC832C37}
 		{5F1091CF-D988-4B51-893F-7655B829506F} = {8D6072FD-3EEB-413F-8985-2075683E566E}
+		{FE5FCD79-F703-46E9-AE70-BDB6583532E8} = {4CA561F4-7C84-434E-A962-64D595D0D4EC}
 	EndGlobalSection
 EndGlobal
