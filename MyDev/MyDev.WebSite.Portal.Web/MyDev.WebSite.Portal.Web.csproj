@@ -96,10 +96,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\UserCenter\Controllers\HomeController.cs" />
     <Compile Include="Areas\UserCenter\UserCenterAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,7 @@
     <Content Include="Areas\UserCenter\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\UserCenter\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UserCenter\Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -123,7 +126,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\UserCenter\Models\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyDev.Common\MyDev.Common.csproj">
+      <Project>{77fb0324-6809-4428-9ef7-c626376cd595}</Project>
+      <Name>MyDev.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyDev.WebSite.Portal.WebLogic\MyDev.WebSite.Portal.WebLogic.csproj">
+      <Project>{cb8c9e37-6854-48ea-abf1-0ded3242a3c9}</Project>
+      <Name>MyDev.WebSite.Portal.WebLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
