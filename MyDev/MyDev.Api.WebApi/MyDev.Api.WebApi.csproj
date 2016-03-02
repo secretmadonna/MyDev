@@ -217,7 +217,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MyDev.Api.WebApiLogic\MyDev.Api.WebApiLogic.csproj">
+      <Project>{ddfb44a2-71f8-40f0-a750-1b921290568f}</Project>
+      <Name>MyDev.Api.WebApiLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

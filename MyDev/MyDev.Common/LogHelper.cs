@@ -93,6 +93,7 @@ namespace MyDev.Common
             }
             catch (Exception ex)
             {
+                System.Console.WriteLine(ex);
                 return false;
             }
             finally

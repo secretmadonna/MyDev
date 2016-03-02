@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDev.Api.WebApiLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MyDev.Api.WebApi.Controllers
     /// <summary>
     /// 测试
     /// </summary>
-    public class ValuesController : ApiController
+    public class ValuesController : BaseApiController
     {
         /// <summary>
         /// 测试用户Model
