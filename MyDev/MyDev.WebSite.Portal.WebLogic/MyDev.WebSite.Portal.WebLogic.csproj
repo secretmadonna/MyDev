@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
+    <Compile Include="CustomModelBinder.cs" />
+    <Compile Include="PageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UcBaseController.cs" />
   </ItemGroup>
