@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4BCC10DE-7C8F-464C-92E8-63B43BEE89C2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{1732B44D-1044-4E59-851E-80F172B4AF17}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyDev.BusinessLogic</RootNamespace>
-    <AssemblyName>MyDev.BusinessLogic</AssemblyName>
+    <RootNamespace>MyDev.UserInterface.Test.TestClass</RootNamespace>
+    <AssemblyName>MyDev.UserInterface.Test.TestClass</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,20 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountBl.cs" />
-    <Compile Include="BusinessObject\EntityUser.cs" />
-    <Compile Include="BusinessObject\PageModel.cs" />
-    <Compile Include="MyTestBl.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyDev.DataAccess.Db\MyDev.DataAccess.Db.csproj">
-      <Project>{b4acfbc1-2d3f-41f5-bfd1-d05c2664a008}</Project>
-      <Name>MyDev.DataAccess.Db</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyDev.BusinessLogic\MyDev.BusinessLogic.csproj">
+      <Project>{4bcc10de-7c8f-464c-92e8-63b43bee89c2}</Project>
+      <Name>MyDev.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyDev.DataAccess.Model\MyDev.DataAccess.Model.csproj">
-      <Project>{08bbe967-c94f-4d29-8c1b-84439040c1b4}</Project>
-      <Name>MyDev.DataAccess.Model</Name>
+    <ProjectReference Include="..\MyDev.Common.PartnerApi\MyDev.Common.PartnerApi.csproj">
+      <Project>{9c48ffab-cde8-4187-a6b1-9c0c5828e7ee}</Project>
+      <Name>MyDev.Common.PartnerApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyDev.Common\MyDev.Common.csproj">
+      <Project>{77fb0324-6809-4428-9ef7-c626376cd595}</Project>
+      <Name>MyDev.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

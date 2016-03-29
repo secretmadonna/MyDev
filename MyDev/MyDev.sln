@@ -39,6 +39,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{AAF64101-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDev.UserInterface.Test.TestMultiThread", "MyDev.UserInterface.Test.TestMultiThread\MyDev.UserInterface.Test.TestMultiThread.csproj", "{DBFC20A6-8555-4498-9739-4A20D111947F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDev.UserInterface.Test.TestClass", "MyDev.UserInterface.Test.TestClass\MyDev.UserInterface.Test.TestClass.csproj", "{1732B44D-1044-4E59-851E-80F172B4AF17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDev.Common.PartnerApi", "MyDev.Common.PartnerApi\MyDev.Common.PartnerApi.csproj", "{9C48FFAB-CDE8-4187-A6B1-9C0C5828E7EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,14 @@ Global
 		{DBFC20A6-8555-4498-9739-4A20D111947F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBFC20A6-8555-4498-9739-4A20D111947F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBFC20A6-8555-4498-9739-4A20D111947F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1732B44D-1044-4E59-851E-80F172B4AF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1732B44D-1044-4E59-851E-80F172B4AF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1732B44D-1044-4E59-851E-80F172B4AF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1732B44D-1044-4E59-851E-80F172B4AF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C48FFAB-CDE8-4187-A6B1-9C0C5828E7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C48FFAB-CDE8-4187-A6B1-9C0C5828E7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C48FFAB-CDE8-4187-A6B1-9C0C5828E7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C48FFAB-CDE8-4187-A6B1-9C0C5828E7EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,5 +116,7 @@ Global
 		{671667AE-7762-4729-9D1A-0E5AE5EAEEFB} = {17E5C587-9061-48DA-B5D5-B8096D28DB39}
 		{AAF64101-141F-45CE-93CF-58C23A16E505} = {30FEE5A2-FF4C-45C2-BEFE-D316921927B2}
 		{DBFC20A6-8555-4498-9739-4A20D111947F} = {AAF64101-141F-45CE-93CF-58C23A16E505}
+		{1732B44D-1044-4E59-851E-80F172B4AF17} = {AAF64101-141F-45CE-93CF-58C23A16E505}
+		{9C48FFAB-CDE8-4187-A6B1-9C0C5828E7EE} = {C30C73BB-8DCF-4384-B140-486ECAA14456}
 	EndGlobalSection
 EndGlobal
