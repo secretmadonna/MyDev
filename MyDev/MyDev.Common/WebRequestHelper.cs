@@ -14,13 +14,18 @@ namespace MyDev.Common
         {
             try
             {
-                var request = (HttpWebRequest)WebRequest.Create(url);
+                //记录请求信息
+                LogHelper.Write("request.txt", "info", "GetRequest : url = " + url + "\r\n");
+                var request = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
                 request.Method = "GET";
                 using (var response = request.GetResponse())
                 {
                     using (var sr = new StreamReader(response.GetResponseStream(), encode))
                     {
-                        return sr.ReadToEnd();
+                        var content = sr.ReadToEnd();
+                        //日志记录
+                        LogHelper.Write("request.txt", "info", "GetRequest's Response : " + content + "\r\n");
+                        return content;
                     }
                 }
             }
@@ -34,7 +39,7 @@ namespace MyDev.Common
         {
             try
             {
-                var request = (HttpWebRequest)WebRequest.Create(url);
+                var request = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 if (param.Any())
@@ -51,7 +56,7 @@ namespace MyDev.Common
                         s.Write(byteArray, 0, byteArray.Length);
                     }
                 }
-                using (var response = request.GetResponse())
+                using (var response = request.GetResponse() as HttpWebResponse)
                 {
                     using (var sr = new StreamReader(response.GetResponseStream(), encode))
                     {

@@ -30,7 +30,7 @@ namespace MyDev.Common
             string filename = string.Empty;
             try
             {
-                filename = Path.IsPathRooted(logger) ? logger : Path.Combine(Directory.GetCurrentDirectory() + logger);
+                filename = Path.IsPathRooted(logger) ? logger : Path.Combine(Directory.GetCurrentDirectory(), logger);
                 if (!lockers.ContainsKey(filename))
                 {
                     Monitor.TryEnter(locker, timeout, ref lockToken);

@@ -16,7 +16,7 @@ namespace MyDev.Common.PartnerApi.Tencent.Models
     {
         [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
-        [JsonProperty(PropertyName = "expires_in ")]
+        [JsonProperty(PropertyName = "expires_in")]
         public int ExpiresIn { get; set; }
     }
 }

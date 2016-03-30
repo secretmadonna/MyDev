@@ -49,6 +49,7 @@
     <Compile Include="Security\Base64Algorithm.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="WebRequestHelper.cs" />
+    <Compile Include="XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
