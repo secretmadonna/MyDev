@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+@section footer
+{
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/RentOrder/UploadResourceImage",
+                data: { 'id': '@Model.RentOrder.ID', 'newResourceImage': $("#NewResourceImage").val() },
+                dataType: "json",
+                beforeSend: function (jqXHR, settings) {
+                    jQuery.messager.progress();
+                },
+                success: function (data, textStatus, jqXHR) {
+                    jQuery.messager.progress('close');
+                    if (data.ErrorCode == 1) {
+                        $("#NewResourceImage").val("");
+                        jQuery.messager.alert(data.Message, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        jQuery.messager.alert(data.Message);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    jQuery.messager.progress('close');
+                    jQuery.messager.alert("上传租房资料失败,请稍后再试。");
+                },
+                complete: function (jqXHR, textStatus) { }
+            });
+        });
+    </script>
+}

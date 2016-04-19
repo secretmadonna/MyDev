@@ -44,9 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Http\HttpHelper.cs" />
+    <Compile Include="Http\HttpMess.cs" />
+    <Compile Include="Http\HttpMessBody.cs" />
+    <Compile Include="Http\HttpMessHeader.cs" />
     <Compile Include="LogHelper.cs" />
+    <Compile Include="PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Base64Algorithm.cs" />
+    <Compile Include="Serialize\ISerialize.cs" />
+    <Compile Include="StringHelper.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="WebRequestHelper.cs" />
     <Compile Include="XmlHelper.cs" />
@@ -54,6 +61,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

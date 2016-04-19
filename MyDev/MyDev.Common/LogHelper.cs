@@ -8,58 +8,73 @@ using System.Threading.Tasks;
 
 namespace MyDev.Common
 {
+    public enum LogLevel
+    {
+        OFF = 1,
+        FATAL = 2,
+        ERROR = 3,
+        WARN = 4,
+        INFO = 5,
+        DEBUG = 6,
+        TRACE = 7,
+        ALL = 8
+    }
     public class LogHelper
     {
+        /// <summary>
+        /// 日志文件保存的路径（根目录）
+        /// </summary>
+        private static readonly string logDir = AppDomain.CurrentDomain.BaseDirectory;
+
+
         private static object locker = new object();
         private static int timeout = 10000;
         private static Dictionary<string, object> lockers = new Dictionary<string, object>();
         public static bool Write(string logger, string level, string content)
         {
-            if (string.IsNullOrEmpty(logger) || string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(logger) || string.IsNullOrEmpty(level) || string.IsNullOrEmpty(content))
             {
                 return false;
-            }
-            if (string.IsNullOrEmpty(level))
-            {
-                level = "info";
             }
 
             #region 获取写日志的文件
 
             bool lockToken = false;
-            string filename = string.Empty;
+            string logFile = string.Empty;//文件路径（绝对路径）
             try
             {
-                filename = Path.IsPathRooted(logger) ? logger : Path.Combine(Directory.GetCurrentDirectory(), logger);
-                if (!lockers.ContainsKey(filename))
+                logFile = Path.IsPathRooted(logger) ? logger : Path.Combine(logDir, logger);
+                if (!lockers.ContainsKey(logFile))
                 {
                     Monitor.TryEnter(locker, timeout, ref lockToken);
-                    if (!lockers.ContainsKey(filename))
+                    if (!lockers.ContainsKey(logFile))
                     {
-                        if (!File.Exists(filename))
+                        if (File.Exists(logFile))
                         {
-                            var dir = Path.GetDirectoryName(filename);
-                            if (Directory.Exists(dir))
+                            lockers.Add(logFile, new object());
+                        }
+                        else
+                        {
+                            var tempDir = Path.GetDirectoryName(logFile);
+                            if (Directory.Exists(tempDir))
                             {
-                                File.Create(filename).Close();
+                                File.Create(logFile).Close();
                             }
                             else
                             {
-                                var directoryinfo = Directory.CreateDirectory(dir);
-                                if (directoryinfo != null)
+                                if (Directory.CreateDirectory(tempDir) != null)
                                 {
-                                    File.Create(filename).Close();
+                                    File.Create(logFile).Close();
                                 }
                             }
                         }
-                        lockers.Add(filename, new object());
+                        lockers.Add(logFile, new object());
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                System.Console.WriteLine(ex);
-                System.Console.ReadKey();
+                //如何处理异常
                 return false;
             }
             finally
@@ -75,11 +90,11 @@ namespace MyDev.Common
             #region 写日志
 
             lockToken = false;
-            object lockObj = lockers[filename];
+            object lockObj = lockers[logFile];
             try
             {
                 Monitor.TryEnter(lockObj, timeout, ref lockToken);
-                FileInfo fileinfo = new FileInfo(filename);
+                FileInfo fileinfo = new FileInfo(logFile);
                 using (var fs = fileinfo.OpenWrite())
                 {
                     var sw = new StreamWriter(fs);
@@ -91,9 +106,9 @@ namespace MyDev.Common
                 //Thread.Sleep(5000);//阻塞5s，模拟写日志过程
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                System.Console.WriteLine(ex);
+                //如何处理异常
                 return false;
             }
             finally

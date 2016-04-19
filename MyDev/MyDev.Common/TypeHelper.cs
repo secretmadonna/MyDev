@@ -1,53 +1,97 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace MyDev.Common
 {
     public class TypeHelper
     {
         /// <summary>
-        /// 序列化
+        /// Json序列化
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
         public static string ToJson(object o)
         {
-            try
+            if (o == null)
             {
-                if (o == null)
-                {
-                    return string.Empty;
-                }
-                return JsonConvert.SerializeObject(o);
+                throw new ArgumentException("参数{0}不能是null或空", "o");
             }
-            catch
-            {
-                return string.Empty;
-            }
+            return JsonConvert.SerializeObject(o);
         }
         /// <summary>
-        /// 反序列化
+        /// Json反序列化
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static T ToObject<T>(string json)
+        public static T JsonToObject<T>(string json)
         {
-            try
+            if (json==null)
             {
-                if (string.IsNullOrEmpty(json))
-                {
-                    return default(T);
-                }
-                return JsonConvert.DeserializeObject<T>(json);
+                throw new ArgumentException("参数{0}不能是null或空", "json");
             }
-            catch
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        /// <summary>
+        /// xml序列化
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public static string ToXml(object o)
+        {
+            if (o == null)
             {
-                return default(T);
+                throw new ArgumentException("参数{0}不能是null或空", "o");
+            }
+            var settings = new XmlWriterSettings();
+            //去除xml声明<?xml version="1.0" encoding="utf-8"?>
+            settings.OmitXmlDeclaration = true;
+            settings.Encoding = Encoding.Default;
+            settings.Indent = true;
+            using (var ms = new MemoryStream())
+            {
+                using (var writer = XmlWriter.Create(ms, settings))
+                {
+                    //去除默认命名空间xmls:xsi和xmlns:xsd
+                    var ns = new XmlSerializerNamespaces();
+                    ns.Add(string.Empty, string.Empty);
+                    var xs = new XmlSerializer(o.GetType());
+                    xs.Serialize(writer, o, ns);
+                }
+                return settings.Encoding.GetString(ms.ToArray());
+            }
+        }
+        /// <summary>
+        /// xml反序列化
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xml"></param>
+        /// <returns></returns>
+        public static T XmlToObject<T>(string xml)
+        {
+            if (xml == null)
+            {
+                throw new ArgumentException("参数{0}不能是null或空", "xml");
+            }
+            var settings = new XmlReaderSettings();
+            using (var ms = new MemoryStream())
+            {
+                T t = default(T);
+                using (var reader = XmlReader.Create(ms, settings))
+                {
+                    var xs = new XmlSerializer(typeof(T));
+                    var o = xs.Deserialize(reader);
+                    t = (T)o;
+                }
+                return t;
             }
         }
     }

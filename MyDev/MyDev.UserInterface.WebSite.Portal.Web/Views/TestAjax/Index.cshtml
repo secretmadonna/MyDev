@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<input type="button" value="获取" id="btnGetJson" />
+
+
+<div>
+    <form action="/TestAjax/SaveFormData" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="Id" value="1" />
+        <input type="file" name="Pic1" />
+        <input type="file" name="Pic2" />
+        <input type="submit" value="提交" />
+    </form>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#btnGetJson").bind("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/TestAjax/GetJson",
+                    data: { 'id': 'id-value', 'key': 'key-value', 'value': 'value-value' },
+                    dataType: "json",
+                    beforeSend: function (jqXHR, settings) {
+                        alert("beforeSend : " + JSON.stringify(settings));
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        alert("success : " + JSON.stringify(data));
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("error : " + errorThrown + "(" + textStatus + ")");
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        alert("complete : " + textStatus);
+                    }
+                }).always(function () {
+                    alert("always : ");
+                }).complete(function () {
+                    alert("complete : ");
+                }).done(function () {
+                    alert("done : ");
+                }).error(function () {
+                    alert("error : ");
+                }).fail(function () {
+                    alert("fail : ");
+                }).progress(function () {
+                    alert("progress : ");
+                }).success(function () {
+                    alert("success : ");
+                }).then(function () {
+                    alert("then : ");
+                });
+            });
+        });
+    </script>
+}
