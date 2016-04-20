@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpHelper.cs" />
     <Compile Include="Http\HttpHelper.cs" />
     <Compile Include="Http\HttpMess.cs" />
     <Compile Include="Http\HttpMessBody.cs" />

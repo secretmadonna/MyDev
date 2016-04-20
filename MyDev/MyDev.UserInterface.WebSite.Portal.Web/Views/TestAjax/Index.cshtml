@@ -1,63 +1,169 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "TestAjax/Index";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<h2>@(ViewBag.Title)</h2>
 
-<input type="button" value="获取" id="btnGetJson" />
+<div style="border:1px solid red;margin-top:10px;">
+    <input type="button" value="获取PostJson" id="btnGetPostJson" />
+    <input type="button" value="获取GetJson" id="btnGetGetJson" />
+</div>
 
-
-<div>
+<div style="border:1px solid red;margin-top:10px;">
     <form action="/TestAjax/SaveFormData" method="post" enctype="multipart/form-data">
         <input type="hidden" name="Id" value="1" />
-        <input type="file" name="Pic1" />
-        <input type="file" name="Pic2" />
+        <input type="file" name="Picture" />
+        <input type="file" name="File" />
         <input type="submit" value="提交" />
     </form>
 </div>
 
-
-@section scripts
-{
-    <script type="text/javascript">
-        $(function () {
-            $("#btnGetJson").bind("click", function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/TestAjax/GetJson",
-                    data: { 'id': 'id-value', 'key': 'key-value', 'value': 'value-value' },
-                    dataType: "json",
-                    beforeSend: function (jqXHR, settings) {
-                        alert("beforeSend : " + JSON.stringify(settings));
-                    },
-                    success: function (data, textStatus, jqXHR) {
-                        alert("success : " + JSON.stringify(data));
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert("error : " + errorThrown + "(" + textStatus + ")");
-                    },
-                    complete: function (jqXHR, textStatus) {
-                        alert("complete : " + textStatus);
-                    }
-                }).always(function () {
-                    alert("always : ");
-                }).complete(function () {
-                    alert("complete : ");
-                }).done(function () {
-                    alert("done : ");
-                }).error(function () {
-                    alert("error : ");
-                }).fail(function () {
-                    alert("fail : ");
-                }).progress(function () {
-                    alert("progress : ");
-                }).success(function () {
-                    alert("success : ");
-                }).then(function () {
-                    alert("then : ");
-                });
+<script type="text/javascript" src="~/Scripts/jquery-2.2.3.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnGetPostJson").bind("click", function () {
+            //beforeSend->success->always(jqXHR)->done(jqXHR)->success(jqXHR)->then(jqXHR)->pipe(jqXHR)->complete
+            //beforeSend->error->always(jqXHR)->error(jqXHR)->fail(jqXHR)->then(jqXHR)->pipe(jqXHR)->complete
+            $.ajax({
+                type: "POST",
+                url: "/TestAjax/GetPostJson",
+                data: { paramName: "paramValue" },
+                dataType: "json",
+                beforeSend: function (jqXHR, settings) {
+                    console.log("beforeSend(JQuery.ajax)");
+                    console.log(jqXHR);
+                    console.log(settings);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log("success(JQuery.ajax)");
+                    console.log(data);
+                    console.log(textStatus);
+                    console.log(jqXHR);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error(JQuery.ajax)");
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                complete: function (jqXHR, textStatus) {
+                    console.log("complete(JQuery.ajax)");
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                }
+            }).always(function (dataOrJqXHR, textStatus, jqXHROrErrorThrown) {
+                console.log("always(jqXHR)");
+                console.log(dataOrJqXHR);
+                console.log(textStatus);
+                console.log(jqXHROrErrorThrown);
+            }).done(function (data, textStatus, jqXHR) {
+                console.log("done(jqXHR)");
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }).success(function (data, textStatus, jqXHR) {
+                console.log("success(jqXHR)");
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }).error(function (jqXHR, textStatus, errorThrown) {
+                console.log("error(jqXHR)");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.log("fail(jqXHR)");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }).then(function (data, textStatus, jqXHR) {
+                //success
+                console.log("then(jqXHR)");
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }, function (jqXHR, textStatus, errorThrown) {
+                //error
+                console.log("then(jqXHR)");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }).pipe(function () {
+                console.log("pipe(jqXHR)");
             });
         });
-    </script>
-}
+        $("#btnGetGetJson").bind("click", function () {
+            //beforeSend->success->always(jqXHR)->done(jqXHR)->success(jqXHR)->then(jqXHR)->pipe(jqXHR)->complete
+            //beforeSend->error->always(jqXHR)->error(jqXHR)->fail(jqXHR)->then(jqXHR)->pipe(jqXHR)->complete
+            $.ajax({
+                type: "GET",
+                url: "/TestAjax/GetGetJson",
+                data: { paramName: "paramValue" },
+                dataType: "json",
+                beforeSend: function (jqXHR, settings) {
+                    console.log("beforeSend(JQuery.ajax)");
+                    console.log(jqXHR);
+                    console.log(settings);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log("success(JQuery.ajax)");
+                    console.log(data);
+                    console.log(textStatus);
+                    console.log(jqXHR);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error(JQuery.ajax)");
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                complete: function (jqXHR, textStatus) {
+                    console.log("complete(JQuery.ajax)");
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                }
+            }).always(function (dataOrJqXHR, textStatus, jqXHROrErrorThrown) {
+                console.log("always(jqXHR)");
+                console.log(dataOrJqXHR);
+                console.log(textStatus);
+                console.log(jqXHROrErrorThrown);
+            }).done(function (data, textStatus, jqXHR) {
+                console.log("done(jqXHR)");
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }).success(function (data, textStatus, jqXHR) {
+                console.log("success(jqXHR)");
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }).error(function (jqXHR, textStatus, errorThrown) {
+                console.log("error(jqXHR)");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.log("fail(jqXHR)");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }).then(function (data, textStatus, jqXHR) {
+                //success
+                console.log("then(jqXHR)");
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }, function (jqXHR, textStatus, errorThrown) {
+                //error
+                console.log("then(jqXHR)");
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }).pipe(function () {
+                console.log("pipe(jqXHR)");
+            });
+        });
+    });
+</script>
