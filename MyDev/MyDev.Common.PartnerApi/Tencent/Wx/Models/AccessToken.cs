@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyDev.Common.PartnerApi.Tencent.Models
+namespace MyDev.Common.PartnerApi.Tencent.Wx.Models
 {
     /// <summary>
     /// 接口调用凭证（access_token）

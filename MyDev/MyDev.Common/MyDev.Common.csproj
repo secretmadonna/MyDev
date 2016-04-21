@@ -44,10 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Http\HttpHelper.cs" />
-    <Compile Include="Http\HttpMess.cs" />
-    <Compile Include="Http\HttpMessBody.cs" />
-    <Compile Include="Http\HttpMessHeader.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="LockHelper.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

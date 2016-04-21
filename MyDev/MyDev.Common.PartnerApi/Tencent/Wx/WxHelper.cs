@@ -1,4 +1,4 @@
-﻿using MyDev.Common.PartnerApi.Tencent.Models;
+﻿using MyDev.Common.PartnerApi.Tencent.Wx.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,10 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace MyDev.Common.PartnerApi.Tencent
+namespace MyDev.Common.PartnerApi.Tencent.Wx
 {
-    public class TenHelper
+
+    public class WxHelper
     {
+        #region 所涉及的文件存放的根目录
+
+        private static readonly string _absoluteDir = AppDomain.CurrentDomain.BaseDirectory;
+
+        #endregion
         public static string AppId
         {
             get
@@ -58,9 +64,9 @@ namespace MyDev.Common.PartnerApi.Tencent
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static string GetAccessToken(string fileName = "/Ten/token.xml")
+        public static string GetAccessToken(string fileName = "Wx/token.xml")
         {
-            string tokenFilePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            string tokenFilePath = Path.Combine(_absoluteDir, fileName);
             if (File.Exists(tokenFilePath))
             {
                 var xmlDoc = new XmlDocument();

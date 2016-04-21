@@ -45,13 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tencent\Models\AccessToken.cs" />
-    <Compile Include="Tencent\TenHelper.cs" />
+    <Compile Include="Tencent\Wx\Models\AccessToken.cs" />
     <Compile Include="Tencent\WxPay\WxPayApiHelper.cs" />
     <Compile Include="Tencent\WxPay\WxPayConfig.cs" />
     <Compile Include="Tencent\WxPay\WxPayData.cs" />
     <Compile Include="Tencent\WxPay\WxPayException.cs" />
     <Compile Include="Tencent\WxPay\WxPayHttpHelper.cs" />
+    <Compile Include="Tencent\Wx\WxHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Alibaba\" />

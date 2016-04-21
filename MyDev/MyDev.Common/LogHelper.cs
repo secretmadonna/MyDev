@@ -8,28 +8,18 @@ using System.Threading.Tasks;
 
 namespace MyDev.Common
 {
-    public enum LogLevel
-    {
-        OFF = 1,
-        FATAL = 2,
-        ERROR = 3,
-        WARN = 4,
-        INFO = 5,
-        DEBUG = 6,
-        TRACE = 7,
-        ALL = 8
-    }
     public class LogHelper
     {
         /// <summary>
-        /// 日志文件保存的路径（根目录）
+        /// 写日志的根目录
+        /// 如果提供的路径不是绝对路径，是相对路径，就是相对于该“绝对目录”的路径
         /// </summary>
-        private static readonly string logDir = AppDomain.CurrentDomain.BaseDirectory;
-
+        private static readonly string _absoluteDir = AppDomain.CurrentDomain.BaseDirectory;
 
         private static object locker = new object();
         private static int timeout = 10000;
         private static Dictionary<string, object> lockers = new Dictionary<string, object>();
+
         public static bool Write(string logger, string level, string content)
         {
             if (string.IsNullOrEmpty(logger) || string.IsNullOrEmpty(level) || string.IsNullOrEmpty(content))
@@ -43,7 +33,7 @@ namespace MyDev.Common
             string logFile = string.Empty;//文件路径（绝对路径）
             try
             {
-                logFile = Path.IsPathRooted(logger) ? logger : Path.Combine(logDir, logger);
+                logFile = Path.IsPathRooted(logger) ? logger : Path.Combine(_absoluteDir, logger);
                 if (!lockers.ContainsKey(logFile))
                 {
                     Monitor.TryEnter(locker, timeout, ref lockToken);

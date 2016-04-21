@@ -8,6 +8,7 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
 {
     public class TestAjaxController : Controller
     {
+        private static readonly string _absoluteDir = AppDomain.CurrentDomain.BaseDirectory;
         // GET: TestAjax
         public ActionResult Index()
         {
@@ -29,6 +30,39 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
 
         [HttpPost]
         public JsonResult SaveFormData()
+        {
+            var request = Request;
+
+            Dictionary<string, string> fileDic = new Dictionary<string, string>();
+            var files = request.Files;
+            if (files != null && files.Count > 0)
+            {
+                for (int i = 0; i < files.Count; i++)
+                {
+                    var name = files.GetKey(i);
+                    var file = files[i];
+                    var fileSavePath = System.IO.Path.Combine(_absoluteDir, @"Content\Resource\", file.FileName);
+                    var dir = System.IO.Path.GetDirectoryName(fileSavePath);
+                    if (!System.IO.Directory.Exists(dir))
+                    {
+                        System.IO.Directory.CreateDirectory(dir);
+                    }
+                    file.SaveAs(fileSavePath);
+                    fileDic.Add(name, fileSavePath);
+                }
+            }
+
+            var obj = new
+            {
+                StatusCode = 100,
+                StatusDescription = "OK",
+                ReturnData = fileDic
+            };
+            return Json(obj);
+        }
+
+        [HttpPost]
+        public ActionResult GetTextJson()
         {
             var obj = new
             {
@@ -229,7 +263,7 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
                     },
                     RequestContext = new
                     {
-                        HttpContext= new
+                        HttpContext = new
                         {
                             Request.RequestContext.HttpContext.AllErrors,
                             Request.RequestContext.HttpContext.AllowAsyncDuringSyncStages,
@@ -270,6 +304,40 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
                 }
             };
             return Json(obj);
+            //return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetImage()
+        {
+            return Content("this is a test.");
+        }
+
+
+
+        //ContentResult
+        //EmptyResult
+        //FileResult : FileContentResult/FilePathResult/FileStreamResult
+        //HttpStatusCodeResult : HttpNotFoundResult/HttpUnauthorizedResult
+        //JsonResult
+        //JavaScriptResult
+        //RedirectResult
+        //RedirectToRouteResult
+        //ViewResultBase : ViewResult/PartialViewResult
+
+        //ModelValidationResult
+        //ValueProviderResult
+        //ViewEngineResult
+        public ActionResult GetResult()
+        {
+            //return Content("hahahahahaha");
+            //return new EmptyResult();
+            return File(System.IO.Path.Combine(_absoluteDir, @"Content\Resource\", "QQ20160420182637.png"), "image/png");
+            //return HttpNotFound();
+            //return new HttpUnauthorizedResult();
+            //return Json(new { a = "haha", b = 1, c = DateTime.Now }, JsonRequestBehavior.AllowGet);
+            //return JavaScript("alert(\"OK\")");
+            //return Redirect("/TestAjax/GetImage");
+            //return RedirectToAction("GetImage");
+            //return View("Index");
         }
     }
 }
