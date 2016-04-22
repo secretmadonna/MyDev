@@ -48,7 +48,7 @@ namespace MyDev.Common.PartnerApi.Tencent.Wx
             {
                 //每日限额：2000
                 var strUrl = string.Format("https://api.weixin.qq.com/cgi-bin/token?grant_type={0}&appid={1}&secret={2}", grant_type, appid, appsecret);
-                var content = WebRequestHelper.DoGetRequest(strUrl, Encoding.UTF8);
+                var content = HttpHelper.GetTextUseGet(strUrl);
                 var model = TypeHelper.JsonToObject<AccessTokenModel>(content);
                 return model;
             }

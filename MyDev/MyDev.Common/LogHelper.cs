@@ -20,9 +20,15 @@ namespace MyDev.Common
         private static int timeout = 10000;
         private static Dictionary<string, object> lockers = new Dictionary<string, object>();
 
-        public static bool Write(string logger, string level, string content)
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="logger">日志文件，必须存在</param>
+        /// <param name="content">日志内容</param>
+        /// <returns></returns>
+        public static bool Write(string logger,string level, string content)
         {
-            if (string.IsNullOrEmpty(logger) || string.IsNullOrEmpty(level) || string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(logger) || !File.Exists(logger) || string.IsNullOrEmpty(content) )
             {
                 return false;
             }

@@ -72,6 +72,30 @@ namespace MyDev.Common
                 }
             }
         }
+
+        /// <summary>
+        /// 保存到目录下
+        /// </summary>
+        /// <param name="dir">绝对路径(目录)</param>
+        /// <param name="createDir"></param>
+        /// <param name="overwrite"></param>
+        /// <returns></returns>
+        public bool SaveAs(string dir)
+        {
+            try
+            {
+                var name = dir.TrimEnd('\\') + "\\" + this.FileName;
+                if (FileHelper.SaveAs(this.FileData, name, true, true) > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //记录日志
+            }
+            return false;
+        }
     }
     class HttpWebReqAndResp
     {
@@ -161,10 +185,15 @@ namespace MyDev.Common
                     result.FileName = Guid.NewGuid().ToString("N") + FileHelper.GetExtension(result.ContentType);
                     using (var responseStream = reqAndResp.response.GetResponseStream())
                     {
-                        using (var br = new BinaryReader(responseStream))
+                        using (var ms = new MemoryStream())
                         {
-                            result.FileData = br.ReadBytes((int)br.BaseStream.Length);
+                            responseStream.CopyTo(ms);
+                            result.FileData = ms.ToArray();
                         }
+                        //using (var sr = new BinaryReader(responseStream))
+                        //{
+                        //    sr.ReadBytes((int)sr.BaseStream.Length);
+                        //}
                     }
                 }
             }
@@ -364,10 +393,15 @@ namespace MyDev.Common
                     result.FileName = Guid.NewGuid().ToString("N") + FileHelper.GetExtension(result.ContentType);
                     using (var responseStream = reqAndResp.response.GetResponseStream())
                     {
-                        using (var br = new BinaryReader(responseStream))
+                        using (var ms = new MemoryStream())
                         {
-                            result.FileData = br.ReadBytes((int)br.BaseStream.Length);
+                            responseStream.CopyTo(ms);
+                            result.FileData = ms.ToArray();
                         }
+                        //using (var br = new BinaryReader(responseStream))
+                        //{
+                        //    result.FileData = br.ReadBytes((int)br.BaseStream.Length);
+                        //}
                     }
                 }
             }

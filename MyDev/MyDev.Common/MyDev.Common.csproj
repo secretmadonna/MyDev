@@ -48,14 +48,10 @@
     <Compile Include="HttpHelper.cs" />
     <Compile Include="LockHelper.cs" />
     <Compile Include="LogHelper.cs" />
-    <Compile Include="PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Base64Algorithm.cs" />
     <Compile Include="Serialize\ISerialize.cs" />
-    <Compile Include="StringHelper.cs" />
     <Compile Include="TypeHelper.cs" />
-    <Compile Include="WebRequestHelper.cs" />
-    <Compile Include="XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

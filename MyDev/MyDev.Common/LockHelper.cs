@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace MyDev.Common
 {
-
     public class LockHelper
     {
         private static object locker = new object();
