@@ -50,7 +50,6 @@
     <Compile Include="Tencent\WxPay\WxPayConfig.cs" />
     <Compile Include="Tencent\WxPay\WxPayData.cs" />
     <Compile Include="Tencent\WxPay\WxPayException.cs" />
-    <Compile Include="Tencent\WxPay\WxPayHttpHelper.cs" />
     <Compile Include="Tencent\Wx\WxHelper.cs" />
   </ItemGroup>
   <ItemGroup>

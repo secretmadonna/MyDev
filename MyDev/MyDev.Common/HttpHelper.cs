@@ -20,12 +20,14 @@ namespace MyDev.Common
             get { return this._dataEncode; }
             set { this._dataEncode = value; }
         }
+        //键值对
         private Dictionary<string, string> _nameValues = new Dictionary<string, string>();
         public Dictionary<string, string> NameValues
         {
             get { return this._nameValues; }
             //set { this._nameValues = value; }
         }
+        //文件
         private Dictionary<string, HttpFile> _nameFiles = new Dictionary<string, HttpFile>();
         public Dictionary<string, HttpFile> NameFiles
         {
@@ -583,6 +585,143 @@ namespace MyDev.Common
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
             return true;
+        }
+
+
+
+        public static string WxPayPost(string url, string xml, int timeout = 6, bool useCert = false, string certFile = null, string certPassword = null, string proxyUrl = null)
+        {
+            System.GC.Collect();//垃圾回收，回收没有正常关闭的http连接
+
+            var result = string.Empty;
+
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+            try
+            {
+                //设置最大连接数
+                ServicePointManager.DefaultConnectionLimit = 200;
+                //设置https验证方式
+                if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+                {
+                    ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+                }
+
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "POST";
+                request.Timeout = timeout * 1000;
+                //设置代理服务器
+                //if (!string.IsNullOrEmpty(proxyUrl))
+                //{
+                //    request.Proxy = new WebProxy() { Address = new Uri(proxyUrl) };
+                //}
+                //设置POST的数据类型和长度
+                var reqCharset = Encoding.UTF8;
+                var data = reqCharset.GetBytes(xml);
+                request.ContentType = string.Format("{0}/{1}; charset={2}", "text", "xml", reqCharset.EncodingName);
+                request.ContentLength = data.Length;
+                //是否使用证书
+                if (useCert && !string.IsNullOrEmpty(certFile) && File.Exists(certFile) && !string.IsNullOrEmpty(certPassword))
+                {
+                    request.ClientCertificates.Add(new X509Certificate2(certFile, certPassword));
+                }
+                //往服务器写入数据
+                using (var s = request.GetRequestStream())
+                {
+                    s.Write(data, 0, data.Length);
+                }
+
+                //获取服务端返回，处理返回
+                response = (HttpWebResponse)request.GetResponse();
+
+                var respCharset = Encoding.UTF8;
+                if (!string.IsNullOrEmpty(response.CharacterSet))
+                {
+                    respCharset = Encoding.GetEncoding(response.CharacterSet);
+                }
+                using (var sr = new StreamReader(response.GetResponseStream(), respCharset))
+                {
+                    result = sr.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                    response = null;
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                    request = null;
+                }
+            }
+            return result;
+        }
+
+        public static string WxPayGet(string url, string proxyUrl = null)
+        {
+            System.GC.Collect();//垃圾回收，回收没有正常关闭的http连接
+
+            var result = string.Empty;
+
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+
+            try
+            {
+                //设置最大连接数
+                ServicePointManager.DefaultConnectionLimit = 200;
+                //设置https验证方式
+                if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
+                {
+                    ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+                }
+
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                //设置代理服务器
+                //if (!string.IsNullOrEmpty(proxyUrl))
+                //{
+                //    request.Proxy = new WebProxy() { Address = new Uri(proxyUrl) };
+                //}
+                //获取服务器返回，处理返回
+                response = (HttpWebResponse)request.GetResponse();
+
+                var respCharset = Encoding.UTF8;
+                if (!string.IsNullOrEmpty(response.CharacterSet))
+                {
+                    respCharset = Encoding.GetEncoding(response.CharacterSet);
+                }
+                using (var sr = new StreamReader(response.GetResponseStream(), respCharset))
+                {
+                    result = sr.ReadToEnd();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                    response = null;
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                    request = null;
+                }
+            }
+            return result;
         }
     }
 }

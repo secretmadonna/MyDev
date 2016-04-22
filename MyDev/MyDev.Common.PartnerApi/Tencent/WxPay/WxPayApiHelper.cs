@@ -40,9 +40,9 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
             //请求参数转XML
             var xml = reqParams.ToXml();
-            
+
             //发送请求，得到相应
-            var response = WxPayHttpHelper.Post(strUrl, xml, true);
+            var response = HttpHelper.WxPayPost(strUrl, xml);//WxPayHttpHelper.Post(strUrl, xml, true);
 
             var result = new WxPayData();
             result.FromXml(response);
@@ -69,8 +69,8 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             string xml = reqParams.ToXml();
 
             //发送请求，得到相应
-            string response = WxPayHttpHelper.Post( strUrl,xml, false);
-            
+            string response = HttpHelper.WxPayPost(strUrl, xml);//WxPayHttpHelper.Post(strUrl, xml, false);
+
             var result = new WxPayData();
             result.FromXml(response);
 
