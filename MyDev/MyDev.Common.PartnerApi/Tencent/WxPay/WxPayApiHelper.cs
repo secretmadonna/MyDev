@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDev.Common.PartnerApi.Tencent.Wx;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,7 +59,7 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
             //reqParams.SetValue("spbill_create_ip", WxPayConfig.IP);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -75,9 +76,9 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
         public static WxPayData OrderQuery(WxPayData reqParams)
         {
-            string strUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+            string strUrl = "https://api.mch.weixin.qq.com/pay/orderquery";
             //检测请求必填参数
-            if (!reqParams.HasSetValue("transaction_id")&& !reqParams.HasSetValue("out_trade_no"))
+            if (!reqParams.HasSetValue("transaction_id") && !reqParams.HasSetValue("out_trade_no"))
             {
                 throw new WxPayException("查询订单中，transaction_id、out_trade_no至少填一个！");
             }
@@ -85,7 +86,7 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             //其他请求参数
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -102,17 +103,17 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
         public static WxPayData CloseOrder(WxPayData reqParams)
         {
-            string strUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+            string strUrl = "https://api.mch.weixin.qq.com/pay/closeorder";
             //检测请求必填参数
-            if (!reqParams.HasSetValue("transaction_id") && !reqParams.HasSetValue("out_trade_no"))
+            if (!reqParams.HasSetValue("out_trade_no"))
             {
-                throw new WxPayException("查询订单中，transaction_id、out_trade_no至少填一个！");
+                throw new WxPayException("关闭订单中，缺少必填参数 out_trade_no！");
             }
 
             //其他请求参数
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -154,7 +155,7 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             //其他请求参数
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -174,14 +175,14 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             string strUrl = "https://api.mch.weixin.qq.com/pay/refundquery";
             //检测必填参数
             if (!reqParams.HasSetValue("refund_id") && !reqParams.HasSetValue("out_refund_no")
-                &&!reqParams.HasSetValue("transaction_id") && !reqParams.HasSetValue("out_trade_no"))
+                && !reqParams.HasSetValue("transaction_id") && !reqParams.HasSetValue("out_trade_no"))
             {
                 throw new WxPayException("退款查询接口中，refund_id、out_refund_no、transaction_id、out_trade_no 至少填一个！");
             }
             //其他请求参数
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -198,17 +199,17 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
         public static WxPayData DownloadBill(WxPayData reqParams)
         {
-            string strUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+            string strUrl = "https://api.mch.weixin.qq.com/pay/downloadbill";
             //检测请求必填参数
-            if (!reqParams.HasSetValue("transaction_id") && !reqParams.HasSetValue("out_trade_no"))
+            if (!reqParams.HasSetValue("bill_date"))
             {
-                throw new WxPayException("查询订单中，transaction_id、out_trade_no至少填一个！");
+                throw new WxPayException("下载对账单中，缺少必填参数 bill_date！");
             }
 
             //其他请求参数
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -225,17 +226,34 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
         public static WxPayData Report(WxPayData reqParams)
         {
-            string strUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+            string strUrl = "https://api.mch.weixin.qq.com/payitil/report";
             //检测请求必填参数
-            if (!reqParams.HasSetValue("transaction_id") && !reqParams.HasSetValue("out_trade_no"))
+            if (!reqParams.HasSetValue("interface_url"))
             {
-                throw new WxPayException("查询订单中，transaction_id、out_trade_no至少填一个！");
+                throw new WxPayException("测速上报中，缺少必填参数 interface_url！");
             }
+            else if (!reqParams.HasSetValue("execute_time_"))
+            {
+                throw new WxPayException("测速上报中，缺少必填参数 execute_time_！");
+            }
+            else if (!reqParams.HasSetValue("return_code"))
+            {
+                throw new WxPayException("测速上报中，缺少必填参数 return_code！");
+            }
+            else if (!reqParams.HasSetValue("result_code"))
+            {
+                throw new WxPayException("测速上报中，缺少必填参数 result_code！");
+            }
+            else if (!reqParams.HasSetValue("user_ip"))
+            {
+                throw new WxPayException("测速上报中，缺少必填参数 user_ip！");
+            }
+
 
             //其他请求参数
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
-            reqParams.SetValue("nonce_str", GenerateNonceStr());
+            reqParams.SetValue("nonce_str", WxHelper.GenerateNonceStr());
             reqParams.SetValue("sign", reqParams.MakeSign());
 
             //请求参数转XML
@@ -248,25 +266,6 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             result.FromXml(response);
 
             return result;
-        }
-
-        public static WxPayData GetNotify(System.IO.Stream stream)
-        {
-            var reqParams = string.Empty;
-            using (var sr = new System.IO.StreamReader(stream))
-            {
-                reqParams = sr.ReadToEnd();
-            }
-
-            var result = new WxPayData();
-            result.FromXml(reqParams);
-
-            return result;
-        }
-
-        private static string GenerateNonceStr()
-        {
-            return Guid.NewGuid().ToString().Replace("-", string.Empty);
         }
     }
 }
