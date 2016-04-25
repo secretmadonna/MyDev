@@ -1,5 +1,6 @@
 ﻿using MyDev.Common.PartnerApi.Tencent.Wx;
 using MyDev.Common.PartnerApi.Tencent.WxPay;
+using MyDev.UserInterface.WebSite.Portal.WebLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,15 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
 
             #region wx.config
 
-            var appId = WxHelper.AppId;
-            var nonceStr = WxHelper.GenerateNonceStr();
-            var timeStamp = WxHelper.GetTimeStamp();
-            var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, Request.Url.AbsoluteUri);
-            ViewBag.appId = appId;
-            ViewBag.nonceStr = nonceStr;
-            ViewBag.timeStamp = timeStamp;
-            ViewBag.sign = sign;
+            //var appId = WxHelper.AppId;
+            //var nonceStr = WxHelper.GenerateNonceStr();
+            //var timeStamp = WxHelper.GetTimeStamp();
+            //var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, Request.Url.AbsoluteUri);
+
+            //ViewBag.appId = appId;
+            //ViewBag.nonceStr = nonceStr;
+            //ViewBag.timeStamp = timeStamp;
+            //ViewBag.sign = sign;
 
             #endregion
 
@@ -40,7 +42,7 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
             wxPayData.SetValue("out_trade_no", out_trade_no);
             var total_fee = string.Empty;
             wxPayData.SetValue("total_fee", total_fee);
-            var spbill_create_ip = string.Empty;
+            var spbill_create_ip = System.Web.HttpContext.Current.Request.UserHostAddress;
             wxPayData.SetValue("spbill_create_ip", spbill_create_ip);
             var trade_type = string.Empty;
             wxPayData.SetValue("trade_type", trade_type);
@@ -53,6 +55,7 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
 
             #endregion
 
+
             return View();
         }
 
@@ -62,7 +65,7 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
             var context = HttpContext;
             var data = new WxPayData();
             data.SetValue("return_code", "FAIL");
-            data.SetValue("return_msg", "错误原因");
+            data.SetValue("return_msg", "未知错误");
             var xml = data.ToXml();
             return Content(xml, "text/xml", System.Text.Encoding.UTF8);
         }

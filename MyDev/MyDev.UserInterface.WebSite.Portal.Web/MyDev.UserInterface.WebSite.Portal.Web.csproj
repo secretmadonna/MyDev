@@ -268,6 +268,10 @@
       <Project>{77fb0324-6809-4428-9ef7-c626376cd595}</Project>
       <Name>MyDev.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyDev.UserInterface.WebSite.Portal.WebLogic\MyDev.UserInterface.WebSite.Portal.WebLogic.csproj">
+      <Project>{ab1d4fbc-9333-4fb0-b59e-800c1962fcff}</Project>
+      <Name>MyDev.UserInterface.WebSite.Portal.WebLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
