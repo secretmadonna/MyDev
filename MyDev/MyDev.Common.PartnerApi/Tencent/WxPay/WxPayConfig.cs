@@ -36,6 +36,18 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
         #endregion
 
+        #region 通知地址
+
+        public const string NOTIFY_URL = "";
+
+        #endregion
+
+        #region 商户系统后台机器IP
+
+        public const string IP = "8.8.8.8";
+
+        #endregion
+
         #region 代理服务器设置
 
         public const string PROXY_URL = "";

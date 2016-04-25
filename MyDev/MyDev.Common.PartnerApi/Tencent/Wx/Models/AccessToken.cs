@@ -14,9 +14,24 @@ namespace MyDev.Common.PartnerApi.Tencent.Wx.Models
     /// </summary>
     public class AccessTokenModel
     {
+        [JsonProperty(PropertyName = "errcode")]
+        public int? ErrorCode { get; set; }
+        [JsonProperty(PropertyName = "errmsg")]
+        public string ErrorMessage { get; set; }
         [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
         [JsonProperty(PropertyName = "expires_in")]
-        public int ExpiresIn { get; set; }
+        public int? ExpiresIn { get; set; }
+    }
+    public class JsapiTicketModel
+    {
+        [JsonProperty(PropertyName = "errcode")]
+        public int? ErrorCode { get; set; }
+        [JsonProperty(PropertyName = "errmsg")]
+        public string ErrorMessage { get; set; }
+        [JsonProperty(PropertyName = "ticket")]
+        public string Ticket { get; set; }
+        [JsonProperty(PropertyName = "expires_in")]
+        public int? ExpiresIn { get; set; }
     }
 }

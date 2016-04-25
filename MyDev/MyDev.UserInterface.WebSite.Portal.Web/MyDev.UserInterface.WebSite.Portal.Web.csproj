@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TestAjaxController.cs" />
+    <Compile Include="Controllers\WxPayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +246,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\TestAjax\Index.cshtml" />
+    <Content Include="Views\WxPay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -258,6 +260,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyDev.Common.PartnerApi\MyDev.Common.PartnerApi.csproj">
+      <Project>{9c48ffab-cde8-4187-a6b1-9c0c5828e7ee}</Project>
+      <Name>MyDev.Common.PartnerApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyDev.Common\MyDev.Common.csproj">
       <Project>{77fb0324-6809-4428-9ef7-c626376cd595}</Project>
       <Name>MyDev.Common</Name>

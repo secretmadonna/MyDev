@@ -1,5 +1,6 @@
 ﻿using MyDev.Common;
 using MyDev.Common.PartnerApi.Tencent;
+using MyDev.Common.PartnerApi.Tencent.Wx;
 using MyDev.Common.PartnerApi.Tencent.WxPay;
 using System;
 using System.Collections.Generic;
@@ -104,7 +105,12 @@ namespace MyDev.UserInterface.Test.TestClass
             #endregion
 
 
+            var nonceStr = WxHelper.GenerateNonceStr();
+            var timeStamp = WxHelper.GetTimeStamp();
+            var url = "http://portal.mydev.com/WxPay/Index";
+            var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, url);
 
+            Console.WriteLine(sign);
 
             Console.ReadKey();
         }

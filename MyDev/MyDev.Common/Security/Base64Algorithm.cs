@@ -9,6 +9,7 @@ namespace MyDev.Common.Security
     public class Base64Algorithm
     {
         private const string code = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
         public static string Encrypt(string plainStr)
         {
             var plainByteList = Encoding.Default.GetBytes(plainStr).ToList();
