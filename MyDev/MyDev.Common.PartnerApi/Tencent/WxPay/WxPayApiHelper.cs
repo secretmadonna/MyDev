@@ -30,11 +30,11 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
                 //APP和网页支付提交用户端IP，Native支付填调用微信支付API的机器IP。
                 throw new WxPayException("统一下单中，缺少必填参数 spbill_create_ip！");
             }
-            //else if (!reqParams.HasSetValue("notify_url"))
-            //{
-            //    //接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
-            //    throw new WxPayException("统一下单中，缺少必填参数 spbill_create_ip！");
-            //}
+            else if (!reqParams.HasSetValue("notify_url"))
+            {
+                //接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
+                throw new WxPayException("统一下单中，缺少必填参数 notify_url！");
+            }
             else if (!reqParams.HasSetValue("trade_type"))
             {
                 throw new WxPayException("统一下单中，缺少必填参数 trade_type！");
@@ -51,11 +51,6 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
             }
 
             //其他请求参数
-            if (!reqParams.HasSetValue("notify_url"))
-            {
-                //接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
-                reqParams.SetValue("notify_url", WxPayConfig.NOTIFY_URL);
-            }
             reqParams.SetValue("appid", WxPayConfig.APPID);
             reqParams.SetValue("mch_id", WxPayConfig.MCHID);
             //reqParams.SetValue("spbill_create_ip", WxPayConfig.IP);

@@ -13,19 +13,19 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
         /// <summary>
         /// APPID：绑定支付的APPID（必须配置）
         /// </summary>
-        public const string APPID = "wx2428e34e0e7dc6ef";
+        public const string APPID = "wxa1e090819f42345a";
         /// <summary>
         /// MCHID：商户号（必须配置）
         /// </summary>
-        public const string MCHID = "1233410002";
+        public const string MCHID = "1293045101";
         /// <summary>
         /// KEY：商户支付密钥，参考开户邮件设置（必须配置）
         /// </summary>
-        public const string KEY = "e10adc3849ba56abbe56e056f20f883e";
+        public const string KEY = "Fv7W10U5144voaGbBEj1yC8s844a10t0";
         /// <summary>
         /// APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置）
         /// </summary>
-        public const string APPSECRET = "51c56b886b5be869567dd389b3e5d1d6";
+        public const string APPSECRET = "94c0b2e95b44f9c5302bcb6c0534671b ";
 
         #endregion
 
@@ -33,18 +33,6 @@ namespace MyDev.Common.PartnerApi.Tencent.WxPay
 
         public const string SSLCERT_PATH = "/Ten/cert/apiclient_cert.p12";
         public const string SSLCERT_PASSWORD = "1233410002";
-
-        #endregion
-
-        #region 通知地址
-
-        public const string NOTIFY_URL = "";
-
-        #endregion
-
-        #region 商户系统后台机器IP
-
-        public const string IP = "8.8.8.8";
 
         #endregion
 
