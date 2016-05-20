@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDev.BusinessLogic.CommonObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace MyDev.UserInterface.WebSite.Portal.WebLogic
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var model = base.BindModel(controllerContext, bindingContext);
-            if (model is PageModel)
+            if (model is PageIn)
             {
                 var pageIndex = 1;//默认值
                 var pageSize = 10;//默认值
@@ -30,8 +31,8 @@ namespace MyDev.UserInterface.WebSite.Portal.WebLogic
                 {
                     int.TryParse(vprPageSize.AttemptedValue, out pageSize);
                 }
-                ((PageModel)model).PageIndex = pageIndex;
-                ((PageModel)model).PageSize = pageSize;
+                ((PageIn)model).PageIndex = pageIndex;
+                ((PageIn)model).PageSize = pageSize;
             }
             return model;
         }

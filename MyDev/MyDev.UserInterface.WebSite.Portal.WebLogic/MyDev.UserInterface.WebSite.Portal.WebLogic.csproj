@@ -71,12 +71,17 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="CustomModelBinder.cs" />
-    <Compile Include="PageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UcBaseController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyDev.BusinessLogic\MyDev.BusinessLogic.csproj">
+      <Project>{4bcc10de-7c8f-464c-92e8-63b43bee89c2}</Project>
+      <Name>MyDev.BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

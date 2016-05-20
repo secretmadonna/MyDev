@@ -10,7 +10,8 @@ namespace MyDev.UserInterface.WebSite.Portal.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            LogHelper.Write(System.IO.Path.Combine(System.Environment.CurrentDirectory, "LogFile", "OwinMvc.txt"), null, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + " Startup.Configuration.\r\n");
+            var info = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + " Startup.Configuration.\r\n";
+            LogHelper.Write(LogType.Web, info);
             ConfigureAuth(app);
         }
     }

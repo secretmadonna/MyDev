@@ -30,12 +30,11 @@ namespace MyDev.DataAccess.Db.Context
         /// <param name="interceptionContext"></param>
         public override void ScalarExecuting(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
         {
-            _stopwatch.Start();
             base.ScalarExecuting(command, interceptionContext);
+            _stopwatch.Start();
         }
         public override void ScalarExecuted(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
         {
-            base.ScalarExecuted(command, interceptionContext);
             _stopwatch.Stop();
             //Trace.WriteLine("Scalar : " + _stopwatch.ElapsedTicks);
             if (_stopwatch.ElapsedTicks >= infoValue && _stopwatch.ElapsedTicks < warnValue)
@@ -47,6 +46,7 @@ namespace MyDev.DataAccess.Db.Context
                 LogHelper.Write(LogType.Db, LogLevel.Warn, "Reader : " + command.CommandText);
             }
             _stopwatch.Reset();
+            base.ScalarExecuted(command, interceptionContext);
         }
 
         /// <summary>
@@ -56,12 +56,11 @@ namespace MyDev.DataAccess.Db.Context
         /// <param name="interceptionContext"></param>
         public override void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
         {
-            _stopwatch.Start();
             base.NonQueryExecuting(command, interceptionContext);
+            _stopwatch.Start();
         }
         public override void NonQueryExecuted(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
         {
-            base.NonQueryExecuted(command, interceptionContext);
             _stopwatch.Stop();
             //Trace.WriteLine("NonQuery : " + _stopwatch.ElapsedTicks);
             if (_stopwatch.ElapsedTicks >= infoValue && _stopwatch.ElapsedTicks < warnValue)
@@ -73,6 +72,7 @@ namespace MyDev.DataAccess.Db.Context
                 LogHelper.Write(LogType.Db, LogLevel.Warn, "Reader : " + command.CommandText);
             }
             _stopwatch.Reset();
+            base.NonQueryExecuted(command, interceptionContext);
         }
 
         /// <summary>
@@ -82,12 +82,11 @@ namespace MyDev.DataAccess.Db.Context
         /// <param name="interceptionContext"></param>
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
-            _stopwatch.Start();
             base.ReaderExecuting(command, interceptionContext);
+            _stopwatch.Start();
         }
         public override void ReaderExecuted(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
-            base.ReaderExecuted(command, interceptionContext);
             _stopwatch.Stop();
             if (_stopwatch.ElapsedTicks >= infoValue && _stopwatch.ElapsedTicks < warnValue)
             {
@@ -98,6 +97,7 @@ namespace MyDev.DataAccess.Db.Context
                 LogHelper.Write(LogType.Db, LogLevel.Warn, "Reader : " + command.CommandText);
             }
             _stopwatch.Reset();
+            base.ReaderExecuted(command, interceptionContext);
         }
     }
 }

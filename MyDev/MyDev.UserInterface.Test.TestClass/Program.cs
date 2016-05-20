@@ -133,16 +133,87 @@ namespace MyDev.UserInterface.Test.TestClass
             //    task.Start();
             //}
 
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    if (i % 2 == 0)
+            //    {
+            //        var tempThread = new Thread(new ParameterizedThreadStart(WriteLogMethod));
+            //        tempThread.IsBackground = false;//后台线程和前台线程？
+            //        tempThread.Start(i);
+            //        var info = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + " " + string.Format("启动参数线程,参数为:{0}.", i);
+            //        LogHelper.Write(LogType.Test, info);
+            //    }
+            //    else
+            //    {
+            //        var tempThread = new Thread(new ThreadStart(WriteLogMethod));
+            //        tempThread.IsBackground = false;
+            //        tempThread.Start();
+            //        var info = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + " " + "启动无参数线程.";
+            //        LogHelper.Write(LogType.Test, info);
+            //    }
+            //}
+
             #endregion
 
             #region 数据库
 
-            var result = AccountBl.Login(new BusinessLogic.BusinessObject.LoginModel() { Username = "duanfei", Password = "123456" });
-            Console.WriteLine(TypeHelper.ToJson(result));
+            //try
+            //{
+            //    var result = AccountBl.Login(new BusinessLogic.BusinessObject.LoginModel() { Username = "duanfei", Password = "123456" });
+            //    Console.WriteLine(TypeHelper.ToJson(result));
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogHelper.Write(LogType.Test, ex);
+            //}
+
+            #endregion
+
+            #region 枚举
+
+            //var e = (MyTestEnum)0.3;
+            //e = (MyTestEnum)1;
+            //e = (MyTestEnum)100;
+            //var name = Enum.GetName(typeof(MyTestEnum), e);
+            //Console.WriteLine(name);
 
             #endregion
 
             Console.ReadKey();
         }
+
+        #region 多线程日志
+
+        //public static void WriteLogMethod()
+        //{
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        var info = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + " " + string.Format("不带参线程{0},循环:{1}.", Thread.CurrentThread.ManagedThreadId, i);
+        //        LogHelper.Write(LogType.Test, info);
+        //    }
+        //}
+        //public static void WriteLogMethod(object content)
+        //{
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        var info = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + " " + string.Format("带参线程{0},循环:{1},参数为:{2}.", Thread.CurrentThread.ManagedThreadId, i, content);
+        //        LogHelper.Write(LogType.Test, info);
+        //    }
+        //}
+
+        #endregion
+
+        #region 枚举
+
+        //public enum MyTestEnum
+        //{
+        //    One = 1,
+        //    Two,
+        //    Three,
+        //    Four,
+        //    Five
+        //}
+
+        #endregion
     }
 }
