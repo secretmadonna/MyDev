@@ -15,10 +15,10 @@ namespace MyDev.DataAccess.Db.Enum
         /// <summary>
         /// 女
         /// </summary>
-        FeMale,
+        FeMale = 2,
         /// <summary>
         /// 未知
         /// </summary>
-        Unknown
+        Unknown = 3
     }
 }

@@ -15,10 +15,21 @@ namespace MyDev.DataAccess.Db.Enum
         /// <summary>
         /// 禁用
         /// </summary>
+        Disable = -1
+    }
+    public enum UserStatus
+    {
+        /// <summary>
+        /// 正常
+        /// </summary>
+        Normal = 1,
+        /// <summary>
+        /// 禁用
+        /// </summary>
         Disable = -1,
         /// <summary>
-        /// 删除
+        /// 锁定
         /// </summary>
-        Delete = -10
+        Lock = -2
     }
 }

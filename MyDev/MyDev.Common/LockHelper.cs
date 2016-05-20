@@ -8,8 +8,8 @@ namespace MyDev.Common
 {
     public class LockHelper
     {
-        private static object locker = new object();
-        private static int timeout = 10000;
-        private static Dictionary<string, object> lockers = new Dictionary<string, object>();
+        //private static object locker = new object();
+        //private static int timeout = 10000;
+        //private static Dictionary<string, object> lockers = new Dictionary<string, object>();
     }
 }

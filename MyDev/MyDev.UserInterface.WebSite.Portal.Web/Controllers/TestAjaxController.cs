@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyDev.BusinessLogic;
+using MyDev.UserInterface.WebSite.Portal.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +14,8 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
         // GET: TestAjax
         public ActionResult Index()
         {
+            var loginDto = new LoginDto() { Username = "duanfei", Password = "123456", CodeToken = "", Code = "", IsRemember = false, RetUrl = string.Empty };
+            var result = AccountBl.Login(loginDto);
             return View();
         }
 

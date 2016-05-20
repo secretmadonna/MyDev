@@ -1,15 +1,8 @@
-﻿using MyDev.Common;
-using MyDev.Common.PartnerApi.Tencent;
-using MyDev.Common.PartnerApi.Tencent.Wx;
-using MyDev.Common.PartnerApi.Tencent.WxPay;
+﻿using MyDev.BusinessLogic;
+using MyDev.Common;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace MyDev.UserInterface.Test.TestClass
 {
@@ -18,7 +11,7 @@ namespace MyDev.UserInterface.Test.TestClass
         private static readonly string _absoluteDir = AppDomain.CurrentDomain.BaseDirectory;
         static void Main(string[] args)
         {
-            #region 测试
+            #region 测试路径判断
 
             //////////////////////////////////////
             ///////    测试路径判断    ///////////
@@ -62,7 +55,9 @@ namespace MyDev.UserInterface.Test.TestClass
             //    Console.WriteLine("outPath：" + outPath);
             //}
 
+            #endregion
 
+            #region 测试上传文件
 
             //////////////////////////////////////
             ///////    测试上传文件    ///////////
@@ -89,7 +84,9 @@ namespace MyDev.UserInterface.Test.TestClass
 
             //Console.WriteLine(response);
 
+            #endregion
 
+            #region 测试下载文件
 
             //////////////////////////////////////
             ///////    测试下载文件    ///////////
@@ -104,13 +101,46 @@ namespace MyDev.UserInterface.Test.TestClass
 
             #endregion
 
+            #region 微信相关测试
 
-            var nonceStr = WxHelper.GenerateNonceStr();
-            var timeStamp = WxHelper.GetTimeStamp();
-            var url = "http://portal.mydev.com/WxPay/Index";
-            var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, url);
+            //////////////////////////////////////
+            ///////    微信相关测试    ///////////
+            //////////////////////////////////////
+            //var nonceStr = WxHelper.GenerateNonceStr();
+            //var timeStamp = WxHelper.GetTimeStamp();
+            //var url = "http://portal.mydev.com/WxPay/Index";
+            //var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, url);
+            //Console.WriteLine(sign);
 
-            Console.WriteLine(sign);
+            #endregion
+
+            #region 多线程日志
+
+            //var mainThread = Thread.CurrentThread.ManagedThreadId.ToString();
+            //LogHelper.Write(LogType.Test, LogLevel.Info, mainThread);
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    LogHelper.Write(LogType.Test, LogLevel.Info, mainThread + " : " + i.ToString());
+            //    var task = new Task(() =>
+            //    {
+            //        var currentThread = Thread.CurrentThread.ManagedThreadId.ToString();
+            //        LogHelper.Write(LogType.Test, LogLevel.Info, currentThread);
+            //        for (int j = 0; j < 10; j++)
+            //        {
+            //            LogHelper.Write(LogType.Test, LogLevel.Info, currentThread + " : " + j.ToString());
+            //        }
+            //    });
+            //    task.Start();
+            //}
+
+            #endregion
+
+            #region 数据库
+
+            var result = AccountBl.Login(new BusinessLogic.BusinessObject.LoginModel() { Username = "duanfei", Password = "123456" });
+            Console.WriteLine(TypeHelper.ToJson(result));
+
+            #endregion
 
             Console.ReadKey();
         }

@@ -94,7 +94,8 @@ namespace MyDev.Common
             }
             catch (Exception ex)
             {
-                //记录日志
+                //记录日志？？？
+                LogHelper.Write(LogType.Lib, LogLevel.Error, ex.ToString());
             }
             return false;
         }
@@ -308,6 +309,7 @@ namespace MyDev.Common
             catch (Exception ex)
             {
                 //记录日志？？？
+                LogHelper.Write(LogType.Lib, LogLevel.Error, ex.ToString());
             }
 
             return new HttpWebReqAndResp() { request = request, response = response };

@@ -176,6 +176,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountDto.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="log4net.config" />
     <None Include="Properties\PublishProfiles\Portal-Debug.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -260,6 +262,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyDev.BusinessLogic\MyDev.BusinessLogic.csproj">
+      <Project>{4bcc10de-7c8f-464c-92e8-63b43bee89c2}</Project>
+      <Name>MyDev.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyDev.Common.PartnerApi\MyDev.Common.PartnerApi.csproj">
       <Project>{9c48ffab-cde8-4187-a6b1-9c0c5828e7ee}</Project>
       <Name>MyDev.Common.PartnerApi</Name>

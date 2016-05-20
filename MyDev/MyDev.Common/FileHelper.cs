@@ -103,6 +103,7 @@ namespace MyDev.Common
             {
                 result = -99;
                 //记录日志？？？
+                LogHelper.Write(LogType.Lib, LogLevel.Error, ex.ToString());
             }
             return result;
         }
@@ -155,6 +156,7 @@ namespace MyDev.Common
             {
                 result = -99;
                 //记录日志？？？
+                LogHelper.Write(LogType.Lib, LogLevel.Error, ex.ToString());
             }
             return result;
         }
@@ -252,6 +254,7 @@ namespace MyDev.Common
             catch (Exception ex)
             {
                 //记录日志？？？
+                LogHelper.Write(LogType.Lib, LogLevel.Error, ex.ToString());
             }
             return -1;
         }
@@ -382,6 +385,7 @@ namespace MyDev.Common
             catch (Exception ex)
             {
                 //记录日志？？？
+                LogHelper.Write(LogType.Lib, LogLevel.Error, ex.ToString());
             }
             return -1;
         }

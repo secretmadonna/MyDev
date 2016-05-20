@@ -13,7 +13,7 @@ namespace MyDev.DataAccess.Db.Context
     public class CommonDBContext : DbContext
     {
         public CommonDBContext()
-            : this("name=Context")
+            : this("DefaultConnection")
         { }
         public CommonDBContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
@@ -27,17 +27,6 @@ namespace MyDev.DataAccess.Db.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//移除复数表名的契约
         }
 
-        public DbSet<U_Group> Group { get; set; }
-        public DbSet<U_GroupRole> GroupRole { get; set; }
-        public DbSet<U_GroupUser> GroupUser { get; set; }
-        public DbSet<U_Menu> Menu { get; set; }
-        public DbSet<U_Operate> Operate { get; set; }
-        public DbSet<U_Power> Power { get; set; }
-        public DbSet<U_PowerMenu> PowerMenu { get; set; }
-        public DbSet<U_PowerOperate> PowerOperate { get; set; }
-        public DbSet<U_Role> Role { get; set; }
-        public DbSet<U_RolePower> RolePower { get; set; }
-        public DbSet<U_User> User { get; set; }
-        public DbSet<U_UserRole> UserRole { get; set; }
+        public DbSet<Rbac_User> RbacUser { get; set; }
     }
 }

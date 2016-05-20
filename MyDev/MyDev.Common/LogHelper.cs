@@ -117,5 +117,99 @@ namespace MyDev.Common
 
             #endregion
         }
+
+
+
+        public static void Write(LogType type, LogLevel level, string message)
+        {
+            var logger = GetLogger(type);
+            DoWrite(logger, level, message);
+        }
+
+        private static NLog.ILogger GetLogger(LogType type)
+        {
+            NLog.ILogger logger = null;
+            switch (type)
+            {
+                case LogType.Web:
+                    logger = NLog.LogManager.GetLogger("Web");
+                    break;
+                case LogType.App:
+                    logger = NLog.LogManager.GetLogger("App");
+                    break;
+                case LogType.Wx:
+                    logger = NLog.LogManager.GetLogger("WeiXin");
+                    break;
+                case LogType.Lib:
+                    logger = NLog.LogManager.GetLogger("Library");
+                    break;
+                case LogType.Cache:
+                    logger = NLog.LogManager.GetLogger("Cache");
+                    break;
+                case LogType.Db:
+                    logger = NLog.LogManager.GetLogger("Database");
+                    break;
+                case LogType.Wxpay:
+                    logger = NLog.LogManager.GetLogger("WeiXinPay");
+                    break;
+                case LogType.Alipay:
+                    logger = NLog.LogManager.GetLogger("Alipay");
+                    break;
+                case LogType.Srv:
+                    logger = NLog.LogManager.GetLogger("Service");
+                    break;
+                case LogType.Test:
+                    logger = NLog.LogManager.GetLogger("Test");
+                    break;
+                default:
+                    throw new ArgumentException("不支持的日志类型", "type");
+            }
+            return logger;
+        }
+        private static void DoWrite(NLog.ILogger logger, LogLevel level, string message)
+        {
+            switch (level)
+            {
+                case LogLevel.Debug:
+                    logger.Debug(message);
+                    break;
+                case LogLevel.Info:
+                    logger.Info(message);
+                    break;
+                case LogLevel.Warn:
+                    logger.Warn(message);
+                    break;
+                case LogLevel.Error:
+                    logger.Error(message);
+                    break;
+                case LogLevel.Fatal:
+                    logger.Fatal(message);
+                    break;
+                default:
+                    throw new ArgumentException("不支持的日志级别", "level");
+            }
+        }
+    }
+
+    public enum LogType
+    {
+        Web = 1,
+        App,
+        Wx,
+        Lib,
+        Cache,
+        Db,
+        Wxpay,
+        Alipay,
+        Srv,
+        Test
+    }
+    public enum LogLevel
+    {
+        Debug = 1,
+        Info,
+        Warn,
+        Error,
+        Fatal
     }
 }

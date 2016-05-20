@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyDev.BusinessLogic.Entities
+namespace MyDev.BusinessLogic.CommonObject
 {
     public class PageIn
     {
@@ -18,6 +18,7 @@ namespace MyDev.BusinessLogic.Entities
         /// </summary>
         public int PageSize { get; set; }
     }
+
     public class PageOut<T> where T : BaseEntity
     {
         /// <summary>

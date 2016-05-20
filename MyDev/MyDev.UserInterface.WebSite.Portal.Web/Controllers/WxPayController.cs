@@ -16,15 +16,15 @@ namespace MyDev.UserInterface.WebSite.Portal.Web.Controllers
 
             #region wx.config
 
-            //var appId = WxHelper.AppId;
-            //var nonceStr = WxHelper.GenerateNonceStr();
-            //var timeStamp = WxHelper.GetTimeStamp();
-            //var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, Request.Url.AbsoluteUri);
+            var appId = WxHelper.AppId;
+            var nonceStr = WxHelper.GenerateNonceStr();
+            var timeStamp = WxHelper.GetTimeStamp();
+            var sign = WxHelper.GetJssdkSign(nonceStr, timeStamp, Request.Url.AbsoluteUri);
 
-            //ViewBag.appId = appId;
-            //ViewBag.nonceStr = nonceStr;
-            //ViewBag.timeStamp = timeStamp;
-            //ViewBag.sign = sign;
+            ViewBag.appId = appId;
+            ViewBag.nonceStr = nonceStr;
+            ViewBag.timeStamp = timeStamp;
+            ViewBag.sign = sign;
 
             #endregion
 

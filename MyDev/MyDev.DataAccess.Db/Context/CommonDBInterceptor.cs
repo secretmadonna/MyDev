@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDev.Common;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure.Interception;
@@ -12,15 +13,21 @@ namespace MyDev.DataAccess.Db.Context
     public class CommonDBInterceptor : DbCommandInterceptor
     {
         private readonly Stopwatch _stopwatch = new Stopwatch();
+
         /// <summary>
         /// 执行时间超过此值将被记录
         /// </summary>
-        const int traceValue = 200;
+        const int infoValue = 200 * 1000;
         /// <summary>
         /// 执行时间超过此值将被发出警告
         /// </summary>
-        const int warningValue = 500;
+        const int warnValue = 500 * 1000;
 
+        /// <summary>
+        /// select
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="interceptionContext"></param>
         public override void ScalarExecuting(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
         {
             _stopwatch.Start();
@@ -30,10 +37,23 @@ namespace MyDev.DataAccess.Db.Context
         {
             base.ScalarExecuted(command, interceptionContext);
             _stopwatch.Stop();
-            Trace.WriteLine("Scalar : " + _stopwatch.ElapsedTicks);
+            //Trace.WriteLine("Scalar : " + _stopwatch.ElapsedTicks);
+            if (_stopwatch.ElapsedTicks >= infoValue && _stopwatch.ElapsedTicks < warnValue)
+            {
+                LogHelper.Write(LogType.Db, LogLevel.Info, "Reader : " + command.CommandText);
+            }
+            else if (_stopwatch.ElapsedTicks >= warnValue)
+            {
+                LogHelper.Write(LogType.Db, LogLevel.Warn, "Reader : " + command.CommandText);
+            }
             _stopwatch.Reset();
         }
 
+        /// <summary>
+        /// update,delete
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="interceptionContext"></param>
         public override void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
         {
             _stopwatch.Start();
@@ -43,10 +63,23 @@ namespace MyDev.DataAccess.Db.Context
         {
             base.NonQueryExecuted(command, interceptionContext);
             _stopwatch.Stop();
-            Trace.WriteLine("NonQuery : " + _stopwatch.ElapsedTicks);
+            //Trace.WriteLine("NonQuery : " + _stopwatch.ElapsedTicks);
+            if (_stopwatch.ElapsedTicks >= infoValue && _stopwatch.ElapsedTicks < warnValue)
+            {
+                LogHelper.Write(LogType.Db, LogLevel.Info, "Reader : " + command.CommandText);
+            }
+            else if (_stopwatch.ElapsedTicks >= warnValue)
+            {
+                LogHelper.Write(LogType.Db, LogLevel.Warn, "Reader : " + command.CommandText);
+            }
             _stopwatch.Reset();
         }
 
+        /// <summary>
+        /// select,insert
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="interceptionContext"></param>
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
             _stopwatch.Start();
@@ -56,7 +89,14 @@ namespace MyDev.DataAccess.Db.Context
         {
             base.ReaderExecuted(command, interceptionContext);
             _stopwatch.Stop();
-            Trace.WriteLine("Reader : " + _stopwatch.ElapsedTicks);
+            if (_stopwatch.ElapsedTicks >= infoValue && _stopwatch.ElapsedTicks < warnValue)
+            {
+                LogHelper.Write(LogType.Db, LogLevel.Info, "Reader : " + command.CommandText);
+            }
+            else if (_stopwatch.ElapsedTicks >= warnValue)
+            {
+                LogHelper.Write(LogType.Db, LogLevel.Warn, "Reader : " + command.CommandText);
+            }
             _stopwatch.Reset();
         }
     }
